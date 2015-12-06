@@ -2,9 +2,11 @@ package antea.snowflakes;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 public class Constants {
 
@@ -17,12 +19,16 @@ public class Constants {
 	public static String IMAGE_NAME = "snowflake.png";
 	
 	public static Random rand;
-	public static ImageIcon image;
+	public static BufferedImage image;
 	public static int SCREEN_WIDTH, SCREEN_HEIGHT;
 	
 	public static void initialize() {
 		rand = new Random();
-		image = new ImageIcon(Constants.class.getClassLoader().getResource(IMAGE_NAME));
+		try {
+			image = ImageIO.read(Constants.class.getClassLoader().getResource(IMAGE_NAME));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		SCREEN_WIDTH = gd.getDisplayMode().getWidth();

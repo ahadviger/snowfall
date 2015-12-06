@@ -15,7 +15,6 @@ public class MainCanvas extends JComponent {
 	private static final long serialVersionUID = 8573570891586814358L;
 
 	private List<Snowflake> snowflakes;
-	private BufferedImage image;
 
 	public MainCanvas() {
 		this.snowflakes = new ArrayList<>();
@@ -26,11 +25,6 @@ public class MainCanvas extends JComponent {
 					Constants.FALL_PERIOD,
 					Constants.rand.nextInt(Constants.MAX_FALL_AMPLITUDE),
 					Constants.rand.nextInt(Constants.MAX_FALL_PHASE)));
-		}
-		try {
-			this.image = ImageIO.read(new File("C:/Users/Antea/Desktop/Untitled-1.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -44,9 +38,7 @@ public class MainCanvas extends JComponent {
 	@Override
 	public void paint(Graphics g) {
 		for(Snowflake s : snowflakes) {
-			g.drawImage(image, s.getX(), s.getY(), null);
-			//g.setColor(Color.WHITE);
-			//g.fillOval(s.getX(), s.getY(), 5, 5);
+			g.drawImage(Constants.image, s.getX(), s.getY(), null);
 		}
 	}
 }
